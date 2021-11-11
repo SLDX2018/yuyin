@@ -136,7 +136,7 @@ int text_to_speech(const char* src_text, const char* des_path, const char* param
 int main(int argc, char* argv[])
 {
 	int         ret                  = MSP_SUCCESS;
-	const char* login_params         = "appid = 58249817, work_dir = .";//登录参数,appid与msc库绑定,请勿随意改动
+	const char* login_params         = "appid = e8ceb08a, work_dir = .";//登录参数,appid与msc库绑定,请勿随意改动
 	/*
 	* rdn:           合成音频数字发音方式
 	* volume:        合成音频的音量
@@ -149,7 +149,7 @@ int main(int argc, char* argv[])
 	* 详细参数说明请参阅《讯飞语音云MSC--API文档》
 	*/
 	const char* session_begin_params = "voice_name = xiaoyan, text_encoding = utf8, sample_rate = 16000, speed = 50, volume = 50, pitch = 50, rdn = 2";
-	const char* filename             = "tts_sample.wav"; //合成的语音文件名称
+	const char* filename             = "tts_sample222.wav"; //合成的语音文件名称
 	const char* text                 = "亲爱的用户，您好，这是一个语音合成示例，感谢您对科大讯飞语音技术的支持！科大讯飞是亚太地区最大的语音上市公司，股票代码：002230"; //合成文本
 
 	/* 用户登录 */

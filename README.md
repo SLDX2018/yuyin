@@ -53,7 +53,7 @@ target_link_libraries(
 
 修改代码：
 
- - 找到 *.c 和*.cpp文件中查找appid = 58249817，替换58249817为你自己申请的APPID.
+ - 找到 *.c 和*.cpp文件中查找appid = e8ceb08a，替换e8ceb08a为你自己申请的APPID.
  
 
 编译：

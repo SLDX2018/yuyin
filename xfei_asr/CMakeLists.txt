@@ -6,7 +6,7 @@ project(xfei_asr)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  rospy
+  roslib
   std_msgs
 )
 
@@ -127,92 +127,92 @@ include_directories(
 ## either from message generation or dynamic reconfigure
 # add_dependencies(xfei_asr ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-## Declare a C++ executable
-add_executable(asr_sample src/asr_sample.c)
-add_executable(iat_sample src/iat_sample.c)
-add_executable(tts_sample src/tts_sample.c)
+# ## Declare a C++ executable
+# add_executable(asr_sample src/asr_sample.c)
+# add_executable(iat_sample src/iat_sample.c)
+# add_executable(tts_sample src/tts_sample.c)
 
-add_executable(tts_subscribe_speak src/tts_subscribe_speak.cpp)
-#add_executable(sch_speak src/sch_speak.c)
-#add_executable(sch_text src/sch_text.c)
-#add_executable(speech_recognizer src/speech_recognizer.c)
-#add_executable(linuxrec src/linuxrec.c)
-add_executable(iat_record src/iat_record.c src/speech_recognizer.c src/linuxrec.c)
+# add_executable(tts_subscribe_speak src/tts_subscribe_speak.cpp)
+# #add_executable(sch_speak src/sch_speak.c)
+# #add_executable(sch_text src/sch_text.c)
+# #add_executable(speech_recognizer src/speech_recognizer.c)
+# #add_executable(linuxrec src/linuxrec.c)
+add_executable(iat_record src/iat_record.cpp src/speech_recognizer.c src/linuxrec.c)
 
-add_executable(iat_publish_speak src/iat_publish_speak.cpp src/speech_recognizer.c src/linuxrec.c)
+# add_executable(iat_publish_speak src/iat_publish_speak.cpp src/speech_recognizer.c src/linuxrec.c)
 
-## Add cmake target dependencies of the executable
-## same as for the library above
-# add_dependencies(xfei_asr_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# ## Add cmake target dependencies of the executable
+# ## same as for the library above
+# # add_dependencies(xfei_asr_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
-## Specify libraries to link a library or executable target against
-target_link_libraries(
-   asr_sample
-   ${catkin_LIBRARIES} 
-   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
- )
+# ## Specify libraries to link a library or executable target against
+# target_link_libraries(
+#    asr_sample
+#    ${catkin_LIBRARIES} 
+#    /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
+#  )
 
-target_link_libraries(
-   iat_sample
-   ${catkin_LIBRARIES} 
-   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
- )
+# target_link_libraries(
+#    iat_sample
+#    ${catkin_LIBRARIES} 
+#    /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
+#  )
 
-target_link_libraries(
-   tts_subscribe_speak
-   ${catkin_LIBRARIES} 
-   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
- )
+# target_link_libraries(
+#    tts_subscribe_speak
+#    ${catkin_LIBRARIES} 
+#    /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
+#  )
 
-target_link_libraries(
-   iat_publish_speak
-   ${catkin_LIBRARIES} 
-   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -lpthread -lm -lrt -lasound
- )
+# target_link_libraries(
+#    iat_publish_speak
+#    ${catkin_LIBRARIES} 
+#    /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -lpthread -lm -lrt -lasound
+#  )
 
 #target_link_libraries(
 #   sch_speak
 #   ${catkin_LIBRARIES} 
-#   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
+#   /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
 # )
 
 #target_link_libraries(
 #   sch_text
 #   ${catkin_LIBRARIES} 
-#   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
+#   /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
 # )
 
-target_link_libraries(
-   tts_sample
-   ${catkin_LIBRARIES} 
-   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
- )
+# target_link_libraries(
+#    tts_sample
+#    ${catkin_LIBRARIES} 
+#    /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
+#  )
 
 #target_link_libraries(
 #   speech_recognizer
 #   ${catkin_LIBRARIES} 
-#   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
+#   /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
 # )
 
 #target_link_libraries(
 #   linuxrec
 #   ${catkin_LIBRARIES} 
-#   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
+#   /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
 # )
 #add_library(linuxrec src/linuxrec.c)
 #add_library(speech_recognizer src/speech_recognizer.c)
 #target_link_libraries(
 #   speech_recognizer
 #   ${catkin_LIBRARIES} 
-#   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -pthread
+#   /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -pthread
 #   linuxrec
 # )
 
 target_link_libraries(
    iat_record
    ${catkin_LIBRARIES} 
-   /home/ubu/catkin_ws/src/xfei_asr/lib/libmsc.so -ldl -lpthread -lm -lrt -lasound
+   /home/liyi/codes/yuyin/src/xf-ros/xfei_asr/lib/libmsc.so -ldl -lpthread -lm -lrt -lasound
    #linuxrec
    #speech_recognizer  
  )

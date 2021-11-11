@@ -12,8 +12,15 @@
 #include "speech_recognizer.h"
 #include <iconv.h>
 
+#include <ros/ros.h>
+#include <std_msgs/String.h>
+#include <geometry_msgs/PoseStamped.h>
+
 #define FRAME_LEN	640 
 #define	BUFFER_SIZE	4096
+
+
+ros::Publisher pub;
 
 /* Upload User words */
 static int upload_userwords()
@@ -24,7 +31,7 @@ static int upload_userwords()
 	FILE*			fp			=	NULL;
 	int				ret			=	-1;
 
-	fp = fopen("userwords.txt", "rb");
+	fp = fopen("/home/liyi/codes/yuyin/src/xf-ros/xfei_asr/src/userwords.txt", "rb");
 	if (NULL == fp)										
 	{
 		printf("\nopen [userwords.txt] failed! \n");
@@ -76,7 +83,43 @@ upload_exit:
 static void show_result(char *string, char is_over)
 {
 	
-    printf("\rResult:[ %s ]",  string);
+    // printf("\rResult:[ %s ]",  string);
+    // printf("\rResult:[ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ]");
+
+	std::string ss(string);
+
+	std::cout << "resultttttttt: " << ss << std::endl;
+	std::cout << "sizeeeeeeee: " << ss.size() << std::endl;
+	
+
+	std_msgs::String msg;
+	
+	if(ss == "去1号点")
+	{
+		msg.data = std::string("1");
+		pub.publish(msg);
+	}
+	else if(ss == "去2号点")
+	{
+		msg.data = std::string("2");
+		pub.publish(msg);
+	}
+	else if(ss == "去3号点")
+	{
+		msg.data = std::string("3");
+		pub.publish(msg);
+	}
+	else if(ss == "去4号点")
+	{
+		msg.data = std::string("4");
+		pub.publish(msg);
+	}
+	else if(ss == "去5号点")
+	{
+		msg.data = std::string("5");
+		pub.publish(msg);
+	}
+
 
     if(is_over)
 		putchar('\n');
@@ -247,7 +290,7 @@ static void demo_mic(const char* session_begin_params)
 		printf("start listen failed %d\n", errcode);
 	}
 	/* demo 15 seconds recording */
-	while(i++ < 15)
+	while(i++ < 5)
 		sleep(1);
 	errcode = sr_stop_listening(&iat);
 	if (errcode) {
@@ -267,7 +310,7 @@ int main(int argc, char* argv[])
 	int ret = MSP_SUCCESS;
 	int upload_on =	1; /* whether upload the user word */
 	/* login params, please do keep the appid correct */
-	const char* login_params = "appid = 58249817, work_dir = .";
+	const char* login_params = "appid = e8ceb08a, work_dir = .";
 	int aud_src = 0; /* from mic or file */
 
 	/*
@@ -281,6 +324,25 @@ int main(int argc, char* argv[])
 	/* Login first. the 1st arg is username, the 2nd arg is password
 	 * just set them as NULL. the 3rd arg is login paramertes 
 	 * */
+
+	
+ros::init(argc, argv, "iat_record");
+ros::NodeHandle nh;
+//   pub = nh.advertise<geometry_msgs::PoseStamped>("/sldx5/move_base_simple/goal", 1);
+  pub = nh.advertise<std_msgs::String>("/gfc/au", 1);
+
+  geometry_msgs::PoseStamped msg;
+  msg.pose.position.x = -1;
+  msg.pose.position.y = 0;
+  msg.pose.position.z = 0;
+  msg.pose.orientation.x = 0;
+  msg.pose.orientation.y = 0;
+  msg.pose.orientation.z = 0;
+  msg.pose.orientation.w = 1;
+
+//   pub.publish(msg);
+
+
 	ret = MSPLogin(NULL, NULL, login_params);
 	if (MSP_SUCCESS != ret)	{
 		printf("MSPLogin failed , Error code %d.\n",ret);
@@ -304,13 +366,20 @@ int main(int argc, char* argv[])
 	if(aud_src != 0) {
 		printf("Demo recognizing the speech from microphone\n");
 		printf("Speak in 15 seconds\n");
-
+while(1)
+{
 		demo_mic(session_begin_params);
+
+		printf("wait for anykey to start next once!!!!!!!\n");
+		fflush(stdin);
+		getchar();
+}
+		// demo_mic(session_begin_params);
 
 		printf("15 sec passed\n");
 	} else {
 		printf("Demo recgonizing the speech from a recorded audio file\n");
-		demo_file("wav/iflytek02.wav", session_begin_params); 
+		demo_file("/home/liyi/codes/yuyin/src/xf-ros/xfei_asr/src/wav/iflytek02.wav", session_begin_params); 
 	}
 exit:
 	MSPLogout(); // Logout...
