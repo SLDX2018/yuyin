@@ -326,21 +326,10 @@ int main(int argc, char* argv[])
 	 * */
 
 	
-ros::init(argc, argv, "iat_record");
-ros::NodeHandle nh;
-//   pub = nh.advertise<geometry_msgs::PoseStamped>("/sldx5/move_base_simple/goal", 1);
+	ros::init(argc, argv, "iat_record");
+	ros::NodeHandle nh;
   pub = nh.advertise<std_msgs::String>("/gfc/au", 1);
 
-  geometry_msgs::PoseStamped msg;
-  msg.pose.position.x = -1;
-  msg.pose.position.y = 0;
-  msg.pose.position.z = 0;
-  msg.pose.orientation.x = 0;
-  msg.pose.orientation.y = 0;
-  msg.pose.orientation.z = 0;
-  msg.pose.orientation.w = 1;
-
-//   pub.publish(msg);
 
 
 	ret = MSPLogin(NULL, NULL, login_params);
